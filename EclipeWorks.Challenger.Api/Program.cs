@@ -1,8 +1,11 @@
 
+using EclipeWorks.Challenger.Api.Validation;
 using EclipseWorks.Challenger.Application.Services;
 using EclipseWorks.Challenger.Application.Services.Interfaces;
 using EclipseWorks.Challenger.InfraStructure.ConnectionDb;
 using EclipseWorks.Challenger.InfraStructure.Interfaces;
+using FluentValidation.AspNetCore;
+using System.Globalization;
 
 namespace EclipeWorks.Challenger.Api
 {
@@ -38,6 +41,18 @@ namespace EclipeWorks.Challenger.Api
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            builder.Services.AddFluentValidation(conf =>
+            {
+                conf.RegisterValidatorsFromAssemblyContaining(typeof(FilterReportManagerModelRequestValidator));
+                conf.RegisterValidatorsFromAssemblyContaining(typeof(TaskProjectValidator));
+                conf.RegisterValidatorsFromAssemblyContaining(typeof(CommentValidator));
+                conf.AutomaticValidationEnabled = false;
+                conf.ValidatorOptions.LanguageManager.Culture = new CultureInfo("en-US");
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -63,6 +78,8 @@ namespace EclipeWorks.Challenger.Api
             builder.Services.AddScoped<ITaskProjectService, TaskProjectService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<IReportManagerService, ReportManagerService>();
+            builder.Services.AddScoped<IReportManagerValidatorService, ReportManagerValidatorService>();
+            builder.Services.AddScoped<ITaskProjectValidatorService, TaskProjectValidatorService>();
 
         }
     }

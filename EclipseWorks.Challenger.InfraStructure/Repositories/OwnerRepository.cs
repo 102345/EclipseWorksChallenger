@@ -17,7 +17,7 @@ namespace EclipseWorks.Challenger.InfraStructure.Repositories
 
         public async Task<Owner> GetById(int id)
         {
-            return await _connection.QuerySingleOrDefaultAsync<Owner>("SELECT IOwner ,Name, IdPosition FROM Owner WHERE IdOwner = @Id", new { IdOwner = id }, _transaction);
+            return await _connection.QuerySingleOrDefaultAsync<Owner>("SELECT IdOwner ,Name, IdPosition FROM Owner WHERE IdOwner = @IdOwner", new { IdOwner = id }, _transaction);
         }
     }
 }

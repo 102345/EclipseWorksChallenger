@@ -2,6 +2,7 @@
 using EclipseWorks.Challenger.Application.Contracts;
 using EclipseWorks.Challenger.Application.Services.Interfaces;
 using EclipseWorks.Challenger.Domain.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EclipeWorks.Challenger.Api.Controllers
@@ -14,25 +15,30 @@ namespace EclipeWorks.Challenger.Api.Controllers
 
         private readonly IMapper _mapper;
         public IReportManagerService _reportManagerService;
+        private readonly IValidator<FilterReportManagerModelRequest> _validator;
 
-        public ReportManagerController(IMapper mapper, IReportManagerService reportManagerService)
+        public ReportManagerController(IMapper mapper, IReportManagerService reportManagerService,
+                                         IValidator<FilterReportManagerModelRequest> validator)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _reportManagerService = reportManagerService ?? throw new ArgumentNullException(nameof(reportManagerService));
+            _validator = validator ?? throw new ArgumentNullException(nameof(validator));
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] int idProject, int Status, int idOwner)
+        public async Task<IActionResult> Get([FromQuery] FilterReportManagerModelRequest filterReportManagerModelRequest)
         {
-            //var validationResult = await _validatorFilter.ValidateAsync(filterCustomerSupplierRequest);
+            var validationResult = await _validator.ValidateAsync(filterReportManagerModelRequest);
 
-            //if (!validationResult.IsValid)
-            //{
-            //    return BadRequest(validationResult.Errors);
-            //}
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
 
 
-            var reports = await _reportManagerService.GetAllDeliveries(idProject == 0 ? null: idProject, Status == 0 ? null : Status, idOwner == 0 ? null : idOwner);
+            var reports = await _reportManagerService.GetAllDeliveries(filterReportManagerModelRequest.idProject == 0 ? null: filterReportManagerModelRequest.idProject,
+                                                filterReportManagerModelRequest.Status == 0 ? null : filterReportManagerModelRequest.Status,
+                                                filterReportManagerModelRequest.idOwner == 0 ? null : filterReportManagerModelRequest.idOwner);
 
             if (reports.Any())
             {

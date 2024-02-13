@@ -51,5 +51,19 @@ namespace EclipseWorks.Challenger.InfraStructure.Repositories
                 idTask
             }, _transaction);
         }
+
+        public async Task<IEnumerable<Comment>> GetCommentsByTask(int idTask)
+        {
+
+            var sql = @"SELECT IdComment,
+                              IdTask,  
+                              Description,
+                              CreatedAt
+                              FROM [dbo].[Comment]
+                              WHERE IdTask = @IdTask";
+
+
+            return await _connection.QueryAsync<Comment>(sql, new { IdTask = idTask }, _transaction);
+        }
     }
 }

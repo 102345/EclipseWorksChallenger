@@ -56,7 +56,16 @@ namespace EclipseWorks.Challenger.InfraStructure.Repositories
 
         public async Task<Project> GetById(int id)
         {
-            throw new NotImplementedException();
+            var sql = @"SELECT IdProject,
+                              NameProject,  
+                              IdOwner,
+                              Observation,
+                              CreatedAt
+                              FROM [dbo].[Project]
+                              WHERE IdProject = @IdProject";
+
+
+            return await _connection.QueryFirstOrDefaultAsync<Project>(sql, new { IdProject = id }, _transaction);
         }
 
         public async Task Update(Project project)

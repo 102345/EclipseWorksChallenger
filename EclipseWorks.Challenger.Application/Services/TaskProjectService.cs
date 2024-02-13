@@ -90,5 +90,13 @@ namespace EclipseWorks.Challenger.Application.Services
                 unitOfWork.Commit();
             }
         }
+
+        public async Task<TaskProject> GetById(int idTask)
+        {
+            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
+            {
+                return await unitOfWork.TaskProjects.GetById(idTask);
+            }
+        }
     }
 }

@@ -13,11 +13,13 @@ namespace EclipeWorks.Challenger.Api.Controllers
     {
         private readonly IMapper _mapper;
         public IProjectService _projectService;
+        public ITaskProjectValidatorService _taskProjectValidatorService;
 
-        public ProjectController(IMapper mapper, IProjectService projectService)
+        public ProjectController(IMapper mapper, IProjectService projectService, ITaskProjectValidatorService taskProjectValidatorService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
+            _taskProjectValidatorService = taskProjectValidatorService ?? throw new ArgumentNullException(nameof(taskProjectValidatorService));
         }
 
 
@@ -65,6 +67,31 @@ namespace EclipeWorks.Challenger.Api.Controllers
              var project = _mapper.Map<ProjectModel, Project>(projectModel);
 
              await _projectService.CreateAsync(project);
+
+            return NoContent();
+
+        }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromQuery] int idProject)
+        {
+
+            var project = await _projectService.GetById(idProject);
+
+            if (project == null)
+            {
+                return BadRequest(new { Message = "There is no Project with this idProject" });
+            }
+
+            var retValidator = await _taskProjectValidatorService.HasTaskPending(idProject);
+
+            if(retValidator == true)
+            {
+                return BadRequest(new { Message = "Please complete pending tasks or remove tasks first" });
+            }
+
+            await _projectService.DeleteAsync(idProject);
 
             return NoContent();
 

@@ -2,6 +2,7 @@
 using EclipseWorks.Challenger.Application.Contracts;
 using EclipseWorks.Challenger.Application.Services.Interfaces;
 using EclipseWorks.Challenger.Domain.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EclipeWorks.Challenger.Api.Controllers
@@ -12,11 +13,13 @@ namespace EclipeWorks.Challenger.Api.Controllers
     {
         private readonly IMapper _mapper;
         public ITaskProjectService _taskProjectService;
+        private readonly IValidator<TaskProjectModel> _validator;
 
-        public TaskProjectController(IMapper mapper, ITaskProjectService taskProjectService)
+        public TaskProjectController(IMapper mapper, ITaskProjectService taskProjectService, IValidator<TaskProjectModel> validator)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _taskProjectService = taskProjectService ?? throw new ArgumentNullException(nameof(taskProjectService));
+            _validator = validator ?? throw new ArgumentNullException(nameof(validator));
         }
 
 
@@ -45,12 +48,12 @@ namespace EclipeWorks.Challenger.Api.Controllers
         public async Task<IActionResult> Post([FromBody] TaskProjectModel taskprojectModel)
         {
 
-            //var validationResult = await _validator.ValidateAsync(customerSupplierRequest);
+            var validationResult = await _validator.ValidateAsync(taskprojectModel);
 
-            //if (!validationResult.IsValid)
-            //{
-            //    return BadRequest(validationResult.Errors);
-            //}
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
 
 
 
@@ -88,12 +91,12 @@ namespace EclipeWorks.Challenger.Api.Controllers
         public async Task<IActionResult> Delete([FromQuery] int idTask)
         {
 
-            //var validationResult = await _validator.ValidateAsync(customerSupplierRequest);
+            var taskProjet = await _taskProjectService.GetById(idTask);
 
-            //if (!validationResult.IsValid)
-            //{
-            //    return BadRequest(validationResult.Errors);
-            //}
+            if (taskProjet == null)
+            {
+                return BadRequest(new { Message = "There is no Task with this IdTask" });
+            }
 
             await _taskProjectService.DeleteTaskAsync(idTask);
 

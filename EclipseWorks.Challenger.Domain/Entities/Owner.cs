@@ -6,6 +6,6 @@
 
         public string Name  { get; set; }
 
-        public int Position { get; set; }
+        public int IdPosition { get; set; }
     }
 }

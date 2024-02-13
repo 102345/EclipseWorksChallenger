@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EclipeWorks.Challenger.Api", "EclipeWorks.Challenger.Api\EclipeWorks.Challenger.Api.csproj", "{15D69EEF-F7A6-4ED7-8D83-77B66E583DD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EclipeWorks.Challenger.Api", "EclipeWorks.Challenger.Api\EclipeWorks.Challenger.Api.csproj", "{15D69EEF-F7A6-4ED7-8D83-77B66E583DD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EclipseWorks.Challenger.Domain", "EclipseWorks.Challenger.Domain\EclipseWorks.Challenger.Domain.csproj", "{8D1A593E-5951-483A-BF41-57F84B2AED54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EclipseWorks.Challenger.Domain", "EclipseWorks.Challenger.Domain\EclipseWorks.Challenger.Domain.csproj", "{8D1A593E-5951-483A-BF41-57F84B2AED54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EclipseWorks.Challenger.Application", "EclipseWorks.Challenger.Application\EclipseWorks.Challenger.Application.csproj", "{DB8C82C8-4749-4C90-BE89-09101BE994AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EclipseWorks.Challenger.Application", "EclipseWorks.Challenger.Application\EclipseWorks.Challenger.Application.csproj", "{DB8C82C8-4749-4C90-BE89-09101BE994AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EclipseWorks.Challenger.InfraStructure", "EclipseWorks.Challenger.InfraStructure\EclipseWorks.Challenger.InfraStructure.csproj", "{BCE8E3D0-CEA9-4777-84A5-0E3FEAC362B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EclipseWorks.Challenger.InfraStructure", "EclipseWorks.Challenger.InfraStructure\EclipseWorks.Challenger.InfraStructure.csproj", "{BCE8E3D0-CEA9-4777-84A5-0E3FEAC362B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{4875C271-B08B-42A0-95F8-7C4708DD621E}"
+	ProjectSection(SolutionItems) = preProject
+		Create_Database.sql = Create_Database.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
