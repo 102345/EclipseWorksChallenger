@@ -1,106 +1,101 @@
 ﻿using EclipseWorks.Challenger.Application.Services.Interfaces;
 using EclipseWorks.Challenger.Domain.Entities;
 using EclipseWorks.Challenger.InfraStructure.Interfaces;
-using EclipseWorks.Challenger.InfraStructure.UnitOfWork;
 
 namespace EclipseWorks.Challenger.Application.Services
 {
     public class ProjectService : IProjectService
     {
-        public IReaderStringConnectionDb _readerStringConnectionDb { get; }
-        public ProjectService(IReaderStringConnectionDb readerStringConnectionDb)
+        public IUnitOfWork _unitOfWork { get; }
+        public ProjectService(IUnitOfWork unitOfWork)
         {
-            _readerStringConnectionDb = readerStringConnectionDb ?? throw new ArgumentNullException(nameof(readerStringConnectionDb));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+
         }
         public async Task CreateAsync(Project project)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
-            {
-                await unitOfWork.Projects.Add(project);
 
-                unitOfWork.Commit();
-            }
+            await _unitOfWork.Projects.Add(project);
+
+            _unitOfWork.Commit();
+
         }
 
         public async Task<IEnumerable<Project>> GetAllAsync(int idOwner)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
-            {
-                return await unitOfWork.Projects.GetAllAsync(idOwner);
 
-            }
+            return await _unitOfWork.Projects.GetAllAsync(idOwner);
+
         }
 
-        public async  Task DeleteAsync(int idProject)
+        public async Task DeleteAsync(int idProject)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
+
+
+            var project = await _unitOfWork.Projects.GetById(idProject);
+
+            var historyProject = new HistoryTaskProject()
             {
+                IdOwner = project.IdOwner,
+                IdProject = project.IdProject,
+                DeletedAt = DateTime.Now
+            };
 
-                var project = await unitOfWork.Projects.GetById(idProject);
+            await _unitOfWork.HistoryTaskProjects.Add(historyProject);
 
-                var historyProject = new HistoryTaskProject()
+            var taskProjects = await _unitOfWork.TaskProjects.GetByProject(idProject);
+
+            foreach (var taskProject in taskProjects)
+            {
+                var historyTask = new HistoryTaskProject()
                 {
-                    IdOwner = project.IdOwner,
-                    IdProject = project.IdProject,
+                    IdTask = taskProject.IdTask,
+                    Status = taskProject.Status,
+                    DescriptionTask = taskProject.Description,
+                    IdOwner = taskProject.IdOwner,
+                    IdProject = taskProject.IdProject,
                     DeletedAt = DateTime.Now
                 };
 
-                await unitOfWork.HistoryTaskProjects.Add(historyProject);
+                await _unitOfWork.HistoryTaskProjects.Add(historyTask);
 
-                var taskProjects = await unitOfWork.TaskProjects.GetByProject(idProject);
+                var comments = await _unitOfWork.Comments.GetCommentsByTask(taskProject.IdTask);
 
-                foreach (var taskProject in taskProjects)
+                foreach (var comment in comments)
                 {
-                    var historyTask = new HistoryTaskProject()
+                    var historyComment = new HistoryTaskProject()
                     {
                         IdTask = taskProject.IdTask,
+                        IdComment = comment.IdComment,
                         Status = taskProject.Status,
                         DescriptionTask = taskProject.Description,
+                        DescriptionComment = comment.Description,
                         IdOwner = taskProject.IdOwner,
                         IdProject = taskProject.IdProject,
                         DeletedAt = DateTime.Now
                     };
 
-                    await unitOfWork.HistoryTaskProjects.Add(historyTask);
-
-                    var comments = await unitOfWork.Comments.GetCommentsByTask(taskProject.IdTask);
-
-                    foreach (var comment in comments)
-                    {
-                        var historyComment = new HistoryTaskProject()
-                        {
-                            IdTask = taskProject.IdTask,
-                            IdComment = comment.IdComment,
-                            Status = taskProject.Status,
-                            DescriptionTask = taskProject.Description,
-                            DescriptionComment = comment.Description,
-                            IdOwner = taskProject.IdOwner,
-                            IdProject = taskProject.IdProject,
-                            DeletedAt = DateTime.Now
-                        };
-
-                        await unitOfWork.HistoryTaskProjects.Add(historyComment);
-                    }
-
-                    await unitOfWork.Comments.DeletePerTask(taskProject.IdTask);
-
-                    await unitOfWork.TaskProjects.Delete(taskProject.IdTask);
-
+                    await _unitOfWork.HistoryTaskProjects.Add(historyComment);
                 }
 
-                await unitOfWork.Projects.Delete(idProject);
+                await _unitOfWork.Comments.DeletePerTask(taskProject.IdTask);
 
-                unitOfWork.Commit();
+                await _unitOfWork.TaskProjects.Delete(taskProject.IdTask);
+
             }
+
+            await _unitOfWork.Projects.Delete(idProject);
+
+            _unitOfWork.Commit();
+
         }
 
-        public async  Task<Project> GetById(int id)
+        public async Task<Project> GetById(int id)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
-            {
-                return await unitOfWork.Projects.GetById(id);
 
-            }
+            return await _unitOfWork.Projects.GetById(id);
+
+
         }
     }
 }

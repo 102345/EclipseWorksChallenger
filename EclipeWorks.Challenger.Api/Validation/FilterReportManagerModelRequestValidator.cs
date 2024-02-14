@@ -28,7 +28,7 @@ namespace EclipeWorks.Challenger.Api.Validation
             });
         }
 
-        private bool ValidateOwnerRole(int idOwnerAuthorized)
+        public bool ValidateOwnerRole(int idOwnerAuthorized)
         {   
             if (idOwnerAuthorized <= 0)
             {

@@ -8,20 +8,20 @@ namespace EclipseWorks.Challenger.Application.Services
     public class ReportManagerValidatorService : IReportManagerValidatorService
     {
 
-        public IReaderStringConnectionDb _readerStringConnectionDb { get; }
-        public ReportManagerValidatorService(IReaderStringConnectionDb readerStringConnectionDb)
+        public IUnitOfWork _unitOfWork { get; }
+        public ReportManagerValidatorService(IUnitOfWork unitOfWork)
         {
-            _readerStringConnectionDb = readerStringConnectionDb ?? throw new ArgumentNullException(nameof(readerStringConnectionDb));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+
         }
         public async Task<bool> IsManager(int idOwnerAuthorized)
         {
-            
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
-            {
-                var owner = await unitOfWork.Owners.GetById(idOwnerAuthorized);
 
-                return owner.IdPosition == (int)EnumRoleOwner.Manager ? true : false;
-            }
+
+            var owner = await _unitOfWork.Owners.GetById(idOwnerAuthorized);
+
+            return owner.IdPosition == (int)EnumRoleOwner.Manager ? true : false;
+
 
 
         }

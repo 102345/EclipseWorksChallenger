@@ -2,9 +2,10 @@
 using EclipeWorks.Challenger.Api.Validation;
 using EclipseWorks.Challenger.Application.Services;
 using EclipseWorks.Challenger.Application.Services.Interfaces;
-using EclipseWorks.Challenger.InfraStructure.ConnectionDb;
 using EclipseWorks.Challenger.InfraStructure.Interfaces;
+using EclipseWorks.Challenger.InfraStructure.UnitOfWork;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 
 namespace EclipeWorks.Challenger.Api
@@ -34,7 +35,7 @@ namespace EclipeWorks.Challenger.Api
 
             var connectionString = configuration.GetValue<string>("ConnectionStrings:EclipseWorksChallengerDb");
 
-            builder.Services.AddSingleton<IReaderStringConnectionDb>(new ReaderStringConnectionDb(connectionString));
+            builder.Services.AddSingleton<IUnitOfWork>(new UnitOfWork(connectionString));
 
             ConfigServicesDependencyInjection(builder);
 
@@ -73,7 +74,6 @@ namespace EclipeWorks.Challenger.Api
         private static void ConfigServicesDependencyInjection(WebApplicationBuilder builder)
         {
 
-            //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<ITaskProjectService, TaskProjectService>();
             builder.Services.AddScoped<ICommentService, CommentService>();

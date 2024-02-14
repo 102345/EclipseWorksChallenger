@@ -8,95 +8,91 @@ namespace EclipseWorks.Challenger.Application.Services
     public class TaskProjectService : ITaskProjectService
     {
 
-        public IReaderStringConnectionDb _readerStringConnectionDb { get; }
-        public TaskProjectService(IReaderStringConnectionDb readerStringConnectionDb)
+        public IUnitOfWork _unitOfWork { get; }
+        public TaskProjectService(IUnitOfWork unitOfWork)
         {
-            _readerStringConnectionDb = readerStringConnectionDb ?? throw new ArgumentNullException(nameof(readerStringConnectionDb));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+
         }
         public async Task CreateTaskAsync(TaskProject taskProject)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
+
+            var idTask = await _unitOfWork.TaskProjects.Add(taskProject);
+
+            var historyTask = new HistoryTaskProject()
             {
-                var idTask = await unitOfWork.TaskProjects.Add(taskProject);
+                IdTask = idTask,
+                Status = taskProject.Status,
+                DescriptionTask = taskProject.Description,
+                IdOwner = taskProject.IdOwner,
+                IdProject = taskProject.IdProject,
+                CreatedAt = DateTime.Now
+            };
 
-                var historyTask = new HistoryTaskProject()
-                                    {   
-                                        IdTask = idTask,
-                                        Status = taskProject.Status,
-                                        DescriptionTask = taskProject.Description,
-                                        IdOwner = taskProject.IdOwner,
-                                        IdProject = taskProject.IdProject,
-                                        CreatedAt = DateTime.Now
-                                    };
+            await _unitOfWork.HistoryTaskProjects.Add(historyTask);
 
-                await unitOfWork.HistoryTaskProjects.Add(historyTask);
+            _unitOfWork.Commit();
 
-                unitOfWork.Commit();
-            }
         }
 
         public async Task DeleteTaskAsync(int id)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
+
+            var taskProject = await _unitOfWork.TaskProjects.GetById(id);
+
+            var historyTask = new HistoryTaskProject()
             {
-                var taskProject = await unitOfWork.TaskProjects.GetById(id);
+                IdTask = id,
+                Status = taskProject.Status,
+                DescriptionTask = taskProject.Description,
+                IdOwner = taskProject.IdOwner,
+                IdProject = taskProject.IdProject,
+                DeletedAt = DateTime.Now
+            };
 
-                var historyTask = new HistoryTaskProject()
-                {
-                    IdTask = id,
-                    Status = taskProject.Status,
-                    DescriptionTask = taskProject.Description,
-                    IdOwner = taskProject.IdOwner,
-                    IdProject = taskProject.IdProject,
-                    DeletedAt = DateTime.Now
-                };
+            await _unitOfWork.HistoryTaskProjects.Add(historyTask);
 
-                await unitOfWork.HistoryTaskProjects.Add(historyTask);
+            await _unitOfWork.Comments.DeletePerTask(id);
 
-                await unitOfWork.Comments.DeletePerTask(id);
+            await _unitOfWork.TaskProjects.Delete(id);
 
-                await unitOfWork.TaskProjects.Delete(id);
+            _unitOfWork.Commit();
 
-                unitOfWork.Commit();
-            }
         }
 
         public async Task<IEnumerable<TaskProject>> GetAllTasks(int idProject)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
-            {
-                return await unitOfWork.TaskProjects.GetByProject(idProject);
-            }
+
+            return await _unitOfWork.TaskProjects.GetByProject(idProject);
+
         }
 
         public async Task UpdateTaskAsync(TaskProject taskProject)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
+
+            await _unitOfWork.TaskProjects.Update(taskProject);
+
+            var historyTask = new HistoryTaskProject()
             {
-                await unitOfWork.TaskProjects.Update(taskProject);
+                IdTask = taskProject.IdTask,
+                Status = taskProject.Status,
+                DescriptionTask = taskProject.Description,
+                IdOwner = taskProject.IdOwner,
+                IdProject = taskProject.IdProject,
+                UpdatedAt = DateTime.Now
+            };
 
-                var historyTask = new HistoryTaskProject()
-                {
-                    IdTask = taskProject.IdTask,
-                    Status = taskProject.Status,
-                    DescriptionTask = taskProject.Description,
-                    IdOwner = taskProject.IdOwner,
-                    IdProject = taskProject.IdProject,
-                    UpdatedAt = DateTime.Now
-                };
+            await _unitOfWork.HistoryTaskProjects.Add(historyTask);
 
-                await unitOfWork.HistoryTaskProjects.Add(historyTask);
+            _unitOfWork.Commit();
 
-                unitOfWork.Commit();
-            }
         }
 
         public async Task<TaskProject> GetById(int idTask)
         {
-            using (var unitOfWork = new UnitOfWork(_readerStringConnectionDb.GetStringConnectionName()))
-            {
-                return await unitOfWork.TaskProjects.GetById(idTask);
-            }
+
+            return await _unitOfWork.TaskProjects.GetById(idTask);
+
         }
     }
 }

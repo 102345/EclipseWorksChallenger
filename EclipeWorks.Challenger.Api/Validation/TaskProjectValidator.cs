@@ -8,7 +8,7 @@ namespace EclipeWorks.Challenger.Api.Validation
     {
         public ITaskProjectValidatorService _taskProjectValidatorService;
 
-        private readonly IConfiguration _configuration;
+        public IConfiguration _configuration;
         public TaskProjectValidator(ITaskProjectValidatorService taskProjectValidatorService,IConfiguration configuration)
         {
             _taskProjectValidatorService = taskProjectValidatorService ?? throw new ArgumentNullException(nameof(taskProjectValidatorService));
@@ -74,7 +74,7 @@ namespace EclipeWorks.Challenger.Api.Validation
 
         }
 
-        private bool NotExceedMaximumTask(int idProjet, int numberMaxTask)
+        public bool NotExceedMaximumTask(int idProjet, int numberMaxTask)
         {
           var result = _taskProjectValidatorService.ExceedMaximumTask(idProjet, numberMaxTask).Result;
 
