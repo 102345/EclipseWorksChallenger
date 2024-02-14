@@ -92,10 +92,7 @@ namespace EclipseWorks.Challenger.Application.Services
 
         public async Task<Project> GetById(int id)
         {
-
             return await _unitOfWork.Projects.GetById(id);
-
-
         }
     }
 }

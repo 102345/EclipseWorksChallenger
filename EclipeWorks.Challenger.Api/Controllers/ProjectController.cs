@@ -13,13 +13,16 @@ namespace EclipeWorks.Challenger.Api.Controllers
     {
         private readonly IMapper _mapper;
         public IProjectService _projectService;
+        public IOwnerService _ownerService;
         public ITaskProjectValidatorService _taskProjectValidatorService;
 
-        public ProjectController(IMapper mapper, IProjectService projectService, ITaskProjectValidatorService taskProjectValidatorService)
+        public ProjectController(IMapper mapper, IProjectService projectService, ITaskProjectValidatorService taskProjectValidatorService, 
+                                    IOwnerService ownerService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
             _taskProjectValidatorService = taskProjectValidatorService ?? throw new ArgumentNullException(nameof(taskProjectValidatorService));
+            _ownerService = ownerService ?? throw new ArgumentNullException(nameof(ownerService));
         }
 
 
@@ -27,12 +30,12 @@ namespace EclipeWorks.Challenger.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] int idOwner)
         {
-            //var validationResult = await _validatorFilter.ValidateAsync(filterCustomerSupplierRequest);
+            var owner = await _ownerService.GetById(idOwner);
 
-            //if (!validationResult.IsValid)
-            //{
-            //    return BadRequest(validationResult.Errors);
-            //}
+            if (owner == null)
+            {
+                return BadRequest(new { Message = "There is no Owner with this idOwner" });
+            }
 
 
             var projects= await _projectService.GetAllAsync(idOwner);

@@ -12,7 +12,7 @@ namespace EclipseWorks.Challenger.Application.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 
         }
-        public async Task CreateCommentAsync(Comment comment)
+        public async Task<bool> CreateCommentAsync(Comment comment)
         {
 
             var idComment = await _unitOfWork.Comments.Add(comment);
@@ -34,6 +34,8 @@ namespace EclipseWorks.Challenger.Application.Services
             await _unitOfWork.HistoryTaskProjects.Add(historyTask);
 
             _unitOfWork.Commit();
+
+            return true;
 
         }
     }

@@ -5,7 +5,6 @@ using EclipseWorks.Challenger.Application.Services.Interfaces;
 using EclipseWorks.Challenger.InfraStructure.Interfaces;
 using EclipseWorks.Challenger.InfraStructure.UnitOfWork;
 using FluentValidation.AspNetCore;
-using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 
 namespace EclipeWorks.Challenger.Api
@@ -38,9 +37,6 @@ namespace EclipeWorks.Challenger.Api
             builder.Services.AddSingleton<IUnitOfWork>(new UnitOfWork(connectionString));
 
             ConfigServicesDependencyInjection(builder);
-
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -80,6 +76,7 @@ namespace EclipeWorks.Challenger.Api
             builder.Services.AddScoped<IReportManagerService, ReportManagerService>();
             builder.Services.AddScoped<IReportManagerValidatorService, ReportManagerValidatorService>();
             builder.Services.AddScoped<ITaskProjectValidatorService, TaskProjectValidatorService>();
+            builder.Services.AddScoped<IOwnerService, OwnerService>();
 
         }
     }

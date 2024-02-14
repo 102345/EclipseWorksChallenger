@@ -2,8 +2,8 @@
 
 namespace EclipseWorks.Challenger.Application.Services.Interfaces
 {
-    public interface ICommentService
+    public interface IOwnerService
     {
-        Task<bool> CreateCommentAsync(Comment comment);
+        Task<Owner> GetById(int id);
     }
 }
