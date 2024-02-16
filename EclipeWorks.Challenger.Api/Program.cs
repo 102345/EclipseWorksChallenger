@@ -40,13 +40,11 @@ namespace EclipeWorks.Challenger.Api
 
             var connectionString = $"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password};Trust Server Certificate=True;";
 
-            if (builder.Environment.IsDevelopment())
-            {
+            //if (builder.Environment.IsDevelopment())
+            //{
 
-               connectionString = configuration.GetValue<string>("ConnectionStringsLocal:EclipseWorksChallengerDb");
-            }
-
-            //var connectionString = configuration.GetValue<string>("ConnectionStrings:EclipseWorksChallengerDb");
+            //   connectionString = configuration.GetValue<string>("ConnectionStringsLocal:EclipseWorksChallengerDb");
+            //}
 
             builder.Services.AddSingleton<IUnitOfWork>(new UnitOfWork(connectionString));
 
