@@ -32,7 +32,21 @@ namespace EclipeWorks.Challenger.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:EclipseWorksChallengerDb");
+            var server = configuration["DbServer"] ?? "SqlServerDb";
+            var port = configuration["DbPort"] ?? "1433"; // Default SQL Server port
+            var user = configuration["DbUser"] ?? "sa"; // Warning do not use the SA account
+            var password = configuration["Password"] ?? "52vXnuBiHAH";
+            var database = configuration["Database"] ?? "EclipseWorksChallengerDb";
+
+            var connectionString = $"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password};Trust Server Certificate=True;";
+
+            if (builder.Environment.IsDevelopment())
+            {
+
+               connectionString = configuration.GetValue<string>("ConnectionStringsLocal:EclipseWorksChallengerDb");
+            }
+
+            //var connectionString = configuration.GetValue<string>("ConnectionStrings:EclipseWorksChallengerDb");
 
             builder.Services.AddSingleton<IUnitOfWork>(new UnitOfWork(connectionString));
 

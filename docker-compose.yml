@@ -1,0 +1,42 @@
+version: '1.8'
+services:
+  SqlServerDb:
+    container_name: SqlServerContainer
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "52vXnuBiHAH"
+      MSSQL_PID: Express
+    ports:
+      - "8010:1433"
+    restart: always
+    volumes:
+      - C:\dados\volumes\sqlserver:/var/opt/mssql/data   # Existing volume for data persistence
+      - D:\Projetos\EclipseWorksChallenger:/tmp/scripts  # New volume to copy the script
+
+  create-tables:
+    container_name: SqlServerToolsContainer
+    image: mcr.microsoft.com/mssql-tools
+    command: /bin/bash -c "cp /tmp/scripts/database.sql / && sleep 30s && /opt/mssql-tools/bin/sqlcmd -S SqlServerDb -U sa -P '52vXnuBiHAH' -d master -i /database.sql"
+    volumes:
+      - D:\Projetos\EclipseWorksChallenger:/tmp/scripts  # Mount the scripts volume
+    depends_on:
+      - SqlServerDb  # SqlServerDb precisa iniciar antes de create-tables
+
+  eclipeworks.challenger.api:
+    container_name: EclipseWorksChallegerApiContainer
+    image: ${DOCKER_REGISTRY-}eclipseworkschallenger
+    build: 
+      context: .
+      dockerfile: EclipeWorks.Challenger.Api/Dockerfile  
+    environment:
+      DbServer: "SqlServerDb"
+      DbPort: "1433"
+      DbUser: "sa"
+      Password: "52vXnuBiHAH"
+      Database: "EclipseWorksChallengerDb"
+    ports: 
+      - "8090:5005"
+    restart: always
+    depends_on:
+      - create-tables  # create-tables precisa iniciar antes de eclipeworks.challenger.api

@@ -14,27 +14,38 @@ namespace EclipseWorks.Challenger.Application.Services
         }
         public async Task<bool> CreateCommentAsync(Comment comment)
         {
+            try
+            {   
+                _unitOfWork.BeginTransaction();
 
-            var idComment = await _unitOfWork.Comments.Add(comment);
+                var idComment = await _unitOfWork.Comments.Add(comment);
 
-            var taskProject = await _unitOfWork.TaskProjects.GetById(comment.IdTask);
+                //var taskProject = await _unitOfWork.TaskProjects.GetById(comment.IdTask);
 
-            var historyTask = new HistoryTaskProject()
+                //var historyTask = new HistoryTaskProject()
+                //{
+                //    IdTask = comment.IdTask,
+                //    IdComment = idComment,
+                //    Status = taskProject.Status,
+                //    DescriptionComment = comment.Description,
+                //    DescriptionTask = taskProject.Description,
+                //    IdOwner = taskProject.IdOwner,
+                //    IdProject = taskProject.IdProject,
+                //    CreatedAt = DateTime.Now
+                //};
+
+                //await _unitOfWork.HistoryTaskProjects.Add(historyTask);
+
+                _unitOfWork.Commit();
+
+            }
+            catch (Exception ex)
             {
-                IdTask = comment.IdTask,
-                IdComment = idComment,
-                Status = taskProject.Status,
-                DescriptionComment = comment.Description,
-                DescriptionTask = taskProject.Description,
-                IdOwner = taskProject.IdOwner,
-                IdProject = taskProject.IdProject,
-                CreatedAt = DateTime.Now
-            };
+                string msg = ex.Message;
+                _unitOfWork?.Rollback();
+            }
 
-            await _unitOfWork.HistoryTaskProjects.Add(historyTask);
-
-            _unitOfWork.Commit();
-
+           
             return true;
 
         }

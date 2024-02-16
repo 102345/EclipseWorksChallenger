@@ -14,6 +14,8 @@ namespace EclipseWorks.Challenger.InfraStructure.Interfaces
 
         IHistoryTaskProjectRepository HistoryTaskProjects { get; }
 
+        void BeginTransaction();
         void Commit();
+        void Rollback();
     }
 }

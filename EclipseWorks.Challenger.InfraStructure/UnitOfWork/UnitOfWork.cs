@@ -22,7 +22,7 @@ namespace EclipseWorks.Challenger.InfraStructure.UnitOfWork
         {
             _connection = new SqlConnection(connectionString);
             _connection.Open();
-            _transaction = _connection.BeginTransaction();
+
         }
 
         public IOwnerRepository Owners
@@ -55,24 +55,26 @@ namespace EclipseWorks.Challenger.InfraStructure.UnitOfWork
         {
             get { return _reportManagers ?? (_reportManagers = new ReportManagerRepository(_connection, _transaction)); }
         }
-
+          
         public void Commit()
         {
-            try
-            {
-                _transaction.Commit();
-            }
-            catch
-            {
-                _transaction.Rollback();
-                throw;
-            }
-            finally
-            {
-                _transaction.Dispose();
-                ResetRepositories();
-            }
+
+            _transaction.Commit();
+
+            _transaction.Dispose();
+            ResetRepositories();
         }
+
+        public void BeginTransaction()
+        {
+            _transaction = _connection.BeginTransaction();
+        }
+
+        public void Rollback()
+        {
+            _transaction?.Rollback();
+        }
+
 
         private void ResetRepositories()
         {

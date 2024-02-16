@@ -15,9 +15,12 @@ namespace EclipseWorks.Challenger.Application.Services
         }
         public async Task<bool> IsManager(int idOwnerAuthorized)
         {
-
+             _unitOfWork.BeginTransaction();
 
             var owner = await _unitOfWork.Owners.GetById(idOwnerAuthorized);
+
+            _unitOfWork.Commit();
+
 
             return owner.IdPosition == (int)EnumRoleOwner.Manager ? true : false;
 

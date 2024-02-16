@@ -14,20 +14,25 @@ namespace EclipseWorks.Challenger.Application.Services
         }
         public async Task<bool> HasTaskPending(int idProject)
         {
-
+            _unitOfWork.BeginTransaction();
 
             var tasks = await _unitOfWork.TaskProjects.GetByProject(idProject);
 
             var task = tasks.FirstOrDefault(f => f.Status == (int)EnumStatusTask.Pendency);
+
+            _unitOfWork.Commit();
 
             return task != null ? true : false;
 
         }
 
         public async Task<bool> ExceedMaximumTask(int idProject, int numberMaxTask)
-        {
+        {   
+            _unitOfWork.BeginTransaction();
 
             var tasks = await _unitOfWork.TaskProjects.GetByProject(idProject);
+
+            _unitOfWork.Commit();
 
             var taskCount = tasks.Count();
 

@@ -13,9 +13,14 @@ namespace EclipseWorks.Challenger.Application.Services
 
         }
         public async Task<IEnumerable<ReportManager>> GetAllDeliveries(int? idProject, int? Status, int? idOwner)
-        {
+        {   
+            _unitOfWork.BeginTransaction();
 
-            return await _unitOfWork.ReportManagers.GetAllDeliveries(idProject, Status, idOwner);
+            var reportManagers = await _unitOfWork.ReportManagers.GetAllDeliveries(idProject, Status, idOwner);
+
+            _unitOfWork.Commit();   
+
+            return reportManagers;
 
 
         }

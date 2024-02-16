@@ -14,7 +14,13 @@ namespace EclipseWorks.Challenger.Application.Services
         }
         public async Task<Owner> GetById(int id)
         {
-            return await _unitOfWork.Owners.GetById(id); 
+            _unitOfWork.BeginTransaction();
+
+            var owner = await _unitOfWork.Owners.GetById(id); 
+
+            _unitOfWork.Commit();
+
+            return owner;
         }
     }
 }
