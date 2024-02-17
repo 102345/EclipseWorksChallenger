@@ -18,7 +18,7 @@ usados.
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/5bea2af5-ce23-4bb5-908d-d933523b851d)
 
-## Instruções para realização dos testes de funcionamento do endpoints
+## Instruções para realização dos testes de funcionamento dos endpoints
 
 1. Siga a ordem de chamada dos endpoints usando uma ferramenta de requisição http como o Postman ou outra similar ou chame o projeto usando o Visual Studio para obter a documentação gerada pelo Swagger 
 
