@@ -20,43 +20,53 @@ usados.
 
 ## Instruções para realização dos testes de funcionamento dos endpoints
 
-1. Siga a ordem de chamada dos endpoints usando uma ferramenta de requisição http como o Postman ou outra similar ou chame o projeto usando o Visual Studio para obter a documentação gerada pelo Swagger 
+1. Siga a ordem de chamada dos endpoints usando uma ferramenta de requisição http como o Postman ou outra similar ou chame o projeto usando o Visual Studio para obter a documentação gerada pelo Swagger .
+Acompanhe as ilustrações a seguir para ver os endpoints responsavéis por cada funcionalidade.
 
 Obs : Use idOwner = 1 (role Manager ) , IdOwner = 2 (role Administrator ) ou IdOwner = 3 (role SuportIT ).
 
 a – Criar um projeto :
+POST : http://localhost:8090/eclipseworks/api/project
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/67e4bf01-854d-4804-be9d-c650a57de7dd)
 
 b -  Buscar projetos pelo IdOwner :
+GET : http://localhost:8090/eclipseworks/api/project?idOwner= ?
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/58c92d84-05f3-4d0d-9e5a-5a579f5032d2)
 
 c -  Excluir um projeto :
+DELETE : http://localhost:8090/eclipseworks/api/project?idProject=?
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/56e84e2f-eae4-4598-bf26-82e022b2da7a)
 
 d - Criar uma tarefa :
+POST :  http://localhost:8090/eclipseworks/api/project/task
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/18e1c375-1b4e-4023-a2bf-1c5a9bcb1436)
 
 e – Atualizar uma tarefa :
+PUT :  http://localhost:8090/eclipseworks/api/project/task
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/1ffaeb4d-ad82-47a9-9371-4a33a023352a)
 
 f – Excluir uma tarefa :
+DELETE: http://localhost:8090/eclipseworks/api/project/task?idTask=?
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/e0a017cb-a7a4-4171-8bd6-b68eccc7a4de)
 
 g -  Buscar tarefas por projeto :
+GET: http://localhost:8090/eclipseworks/api/project/task?idProject=?
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/8e2c1eff-8906-4e8e-a906-02c600d4ee9e)
 
 h – Adicionar um comentário em uma tarefa :
+POST: http://localhost:8090/eclipseworks/api/project/task/comment
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/1d6bf8de-2efe-4fa6-8c77-210d8b291f25)
 
 i – Buscar dados de relatório gerencial de performance :
+GET: http://localhost:8090//eclipseworks/api/reportmanager?idOwnerAuthorized=?&idProject=?&Status=?&idOwner=?
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/2876aaf1-99e1-4abd-8167-f8fcca073e50)
 
