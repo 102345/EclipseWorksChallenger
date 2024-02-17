@@ -80,7 +80,7 @@ suas atividades sem ter acesso as informações de atividades de outro gerente d
 
 4 - Outra sugestão : uma funcionalidade de transferências de conjuntos de projetos de um gerente para outro gerente assumir a condução destas atividades,
 
-5 - Acrescentar um campo de registro de data de estimativa de inicio de projeto e de finalização de projeto na criação de um novo projeto.
+5 - Acrescentar um campo de registro de data de estimativa de inicio de projeto e um campo de data de finalização de projeto na criação de um novo projeto.
 
 6 - 
 
