@@ -72,11 +72,16 @@ Segue a imagem de relatório gerado do nivel de cobertura de testes unitários p
 ## Refinamento para as próximas Sprints
 
 1 - Não seria interessante ter um controle de bloqueio de usuários para acessar os endpoints em situações que estão de férias, afastados ou desligados? 
+
 2 - A consulta de relatório gerencial não poderia ter um controle de permissão para apenas o Gerente responsavel por seu grupo de projetos visualizar
 suas atividades sem ter acesso as informações de atividades de outro gerente de projeto ?
+
 3 - Não seria interessante implementar uma funcionalidade de exclusão de comentarios associados a uma tarefa ?
+
 4 - Outra sugestão : uma funcionalidade de transferências de conjuntos de projetos de um gerente para outro gerente assumir a condução destas atividades,
+
 5 - Acrescentar um campo de registro de data de estimativa de inicio de projeto e de finalização de projeto na criação de um novo projeto.
+
 6 - 
 
 
