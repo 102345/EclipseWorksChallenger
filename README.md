@@ -1,7 +1,7 @@
 # EclipseWorks Desafio
 
 Segue um projeto com o uso das seguintes tecnologias : WebApi .NET 7 , ORM Dapper , FluentValidation , Mapper , Docker.
-Padrões arquiteturais : Domain Driven Design , Dependency Injections , UnitOfWOrk , divisão de responsabilidade entre camadas da arquitetura entre outras
+Padrões arquiteturais : Domain Driven Design , Dependency Injections , UnitOfWOrk , divisão de responsabilidade entre camadas da arquitetura entre outros
 usados.
 
 ## Intruções para rodar o docker
