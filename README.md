@@ -80,9 +80,19 @@ suas atividades sem ter acesso as informações de atividades de outro gerente d
 
 4 - Outra sugestão : uma funcionalidade de transferências de conjuntos de projetos de um gerente para outro gerente assumir a condução destas atividades,
 
-5 - Acrescentar um campo de registro de data de estimativa de inicio de projeto e um campo de data de finalização de projeto na criação de um novo projeto.
+5 - Sugestão : Acrescentar um campo de registro de data de estimativa de inicio de projeto e um campo de data de finalização de projeto na criação de um novo projeto.
 
-6 - 
+6 - Sugestão : Apenas usuários no papel de gerente podem criar , alterar  ou excluir projeto.
+
+7 - Sugestão : acrescentar status de controle de situação do projeto : Em andamento , Em rescunho , Bloqueado , Finalizado ou Encerrado. Apenas usuarios no
+papel de Gerente pode alterar o status.
+
+8 - Sugestão : Todas vez que o gerente criar , alterar ou excluir um projeto deve ser disparado uma notificação de aviso para a área PMO ( Project Management
+Office).
+
+9 - Sugestão : Implementar status de situação de usuário no projeto. Exemplos : Em férias , Afastados , Desligados.
+
+10 - Sugestão : Implementar funcionalidade de busca de todas as tarefas e comentarios relacionados ao usuário responsável por suas atividades
 
 
 
