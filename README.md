@@ -20,7 +20,7 @@ usados.
 
 ## Instruções para realização dos testes de funcionamento do endpoints
 
-1. Siga a ordem de chamada dos endpoints usando a uma ferramenta de requisição http como o Postman ou outra similar ou chame o projeto usando o Visual Studio para obter a documentação gerada pelo Swagger 
+1. Siga a ordem de chamada dos endpoints usando uma ferramenta de requisição http como o Postman ou outra similar ou chame o projeto usando o Visual Studio para obter a documentação gerada pelo Swagger 
 
 Obs : Use idOwner = 1 (role Manager ) , IdOwner = 2 (role Administrator ) ou IdOwner = 3 (role SuportIT ).
 
@@ -47,6 +47,30 @@ e – Atualizar uma tarefa :
 f – Excluir uma tarefa :
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/e0a017cb-a7a4-4171-8bd6-b68eccc7a4de)
+
+g -  Buscar tarefas por projeto :
+
+![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/8e2c1eff-8906-4e8e-a906-02c600d4ee9e)
+
+h – Adicionar um comentário em uma tarefa :
+
+![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/1d6bf8de-2efe-4fa6-8c77-210d8b291f25)
+
+i – Buscar dados de relatório gerencial de performance :
+
+![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/2876aaf1-99e1-4abd-8167-f8fcca073e50)
+
+Obs : Apenas o parâmetro IdOwnerAuthorized é obrigatório para a pesquisa.
+
+## Evidências de cobertura por testes unitários
+
+Segue a imagem de relatório gerado do nivel de cobertura de testes unitários para as regras de negócios evidênciadas nas camadas de aplicação e de dominio.
+
+![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/16f138e5-26b8-47e2-8034-ec6a08ad2632)
+
+
+
+
 
 
 
