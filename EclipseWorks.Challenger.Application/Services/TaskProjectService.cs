@@ -13,7 +13,7 @@ namespace EclipseWorks.Challenger.Application.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 
         }
-        public async Task CreateTaskAsync(TaskProject taskProject)
+        public async Task<bool> CreateTaskAsync(TaskProject taskProject)
         {
             try
             {
@@ -35,20 +35,21 @@ namespace EclipseWorks.Challenger.Application.Services
 
                 _unitOfWork.Commit();
 
+                return true;
 
             }
             catch(Exception ex)
             {
                 string message = ex.Message;    
                 _unitOfWork?.Rollback();
-
+                return false;
             }
 
            
 
         }
 
-        public async Task DeleteTaskAsync(int id)
+        public async Task<bool> DeleteTaskAsync(int id)
         {
             try
             {   
@@ -74,12 +75,14 @@ namespace EclipseWorks.Challenger.Application.Services
 
                 _unitOfWork.Commit();
 
+                return true;
+
             }
             catch(Exception ex)
             {
                 string msg = ex.Message;
                 _unitOfWork?.Rollback();
-
+                return false;
             }
           
 
@@ -97,7 +100,7 @@ namespace EclipseWorks.Challenger.Application.Services
 
         }
 
-        public async Task UpdateTaskAsync(TaskProject taskProject)
+        public async Task<bool> UpdateTaskAsync(TaskProject taskProject)
         {
 
             try
@@ -120,10 +123,12 @@ namespace EclipseWorks.Challenger.Application.Services
 
                 _unitOfWork.Commit();
 
+                return true;
             }
             catch (Exception)
             {
                 _unitOfWork?.Rollback();
+                return false;
             }
 
         }

@@ -19,7 +19,8 @@ namespace EclipeWorks.Challenger.Api
 
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
-            var environmentName = Environment.GetEnvironmentVariable("CONSOLENETCORE_ENVIRONMENT");
+            //var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var environmentName = string.Empty;
 
             var configuration = new ConfigurationBuilder()
                                  .SetBasePath(Directory.GetCurrentDirectory())
@@ -32,19 +33,8 @@ namespace EclipeWorks.Challenger.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var server = configuration["DbServer"] ?? "SqlServerDb";
-            var port = configuration["DbPort"] ?? "1433"; // Default SQL Server port
-            var user = configuration["DbUser"] ?? "sa"; // Warning do not use the SA account
-            var password = configuration["Password"] ?? "52vXnuBiHAH";
-            var database = configuration["Database"] ?? "EclipseWorksChallengerDb";
 
-            var connectionString = $"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password};Trust Server Certificate=True;";
-
-            //if (builder.Environment.IsDevelopment())
-            //{
-
-            //   connectionString = configuration.GetValue<string>("ConnectionStringsLocal:EclipseWorksChallengerDb");
-            //}
+            string connectionString = GetConnectionStringsDatabase(configuration, builder);
 
             builder.Services.AddSingleton<IUnitOfWork>(new UnitOfWork(connectionString));
 
@@ -77,6 +67,24 @@ namespace EclipeWorks.Challenger.Api
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static string GetConnectionStringsDatabase(IConfigurationRoot configuration, WebApplicationBuilder builder)
+        {
+            var server = configuration.GetValue<string>("ConnectionStrings:DbServer");
+            var port = configuration.GetValue<string>("ConnectionStrings:DbPort");  // Default SQL Server port
+            var user = configuration.GetValue<string>("ConnectionStrings:DbUser"); // Warning do not use the SA account
+            var password = configuration.GetValue<string>("ConnectionStrings:Password");
+            var database = configuration.GetValue<string>("ConnectionStrings:Database");
+
+            var connectionString = $"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password};Trust Server Certificate=True;";
+
+            //if (builder.Environment.IsDevelopment())
+            //{
+            //    connectionString = $"Data Source={server};Initial Catalog={database};User ID={user};Password={password};Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;";
+            //}
+
+            return connectionString;
         }
 
         private static void ConfigServicesDependencyInjection(WebApplicationBuilder builder)

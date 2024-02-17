@@ -6,8 +6,8 @@ namespace EclipseWorks.Challenger.Application.Services.Interfaces
     {
         Task<TaskProject> GetById(int idTask);
         Task<IEnumerable<TaskProject>> GetAllTasks(int idProject);
-        Task CreateTaskAsync(TaskProject taskProject);
-        Task DeleteTaskAsync(int id);
-        Task UpdateTaskAsync(TaskProject taskProject);
+        Task<bool> CreateTaskAsync(TaskProject taskProject);
+        Task<bool> DeleteTaskAsync(int id);
+        Task<bool> UpdateTaskAsync(TaskProject taskProject);
     }
 }

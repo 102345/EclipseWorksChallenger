@@ -3,9 +3,11 @@ using EclipseWorks.Challenger.InfraStructure.Interfaces;
 using EclipseWorks.Challenger.InfraStructure.Repositories;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EclipseWorks.Challenger.InfraStructure.UnitOfWork
 {
+    [ExcludeFromCodeCoverage]
     public class UnitOfWork : IUnitOfWork
     {
         private IDbConnection _connection;

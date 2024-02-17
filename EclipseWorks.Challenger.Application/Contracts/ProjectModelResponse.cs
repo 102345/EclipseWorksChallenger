@@ -1,5 +1,8 @@
-﻿namespace EclipseWorks.Challenger.Application.Contracts
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace EclipseWorks.Challenger.Application.Contracts
 {
+    [ExcludeFromCodeCoverage]
     public class ProjectModelResponse
     {
         public int IdProject { get; set; }

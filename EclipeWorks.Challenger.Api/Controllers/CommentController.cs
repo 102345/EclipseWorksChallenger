@@ -4,9 +4,11 @@ using EclipseWorks.Challenger.Application.Services.Interfaces;
 using EclipseWorks.Challenger.Domain.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EclipeWorks.Challenger.Api.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [ApiController]
     [Route("eclipseworks/api/project/task/comment")]
     public class CommentController : Controller

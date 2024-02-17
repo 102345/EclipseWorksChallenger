@@ -38,5 +38,8 @@ namespace EclipseWorks.Challenger.Tests.Application
             result.Should().BeTrue();
 
         }
+
+
+
     }
 }

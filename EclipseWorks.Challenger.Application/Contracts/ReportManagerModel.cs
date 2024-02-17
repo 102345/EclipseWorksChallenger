@@ -1,5 +1,8 @@
-﻿namespace EclipseWorks.Challenger.Application.Contracts
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace EclipseWorks.Challenger.Application.Contracts
 {
+    [ExcludeFromCodeCoverage]
     public class ReportManagerModel
     {
         public string NameProject { get; set; }

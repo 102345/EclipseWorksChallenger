@@ -2,10 +2,12 @@
 using EclipseWorks.Challenger.Domain.Entities;
 using EclipseWorks.Challenger.Domain.Repositories.Interfaces;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace EclipseWorks.Challenger.InfraStructure.Repositories
 {
+    [ExcludeFromCodeCoverage]
     public class ReportManagerRepository :IReportManagerRepository
     {
         private readonly IDbConnection _connection;
