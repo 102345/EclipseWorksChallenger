@@ -145,13 +145,13 @@ suas atividades sem ter acesso as informações de atividades de outro gerente d
 
 6 - Sugestão : Apenas usuários no papel de gerente podem criar , alterar  ou excluir projeto.
 
-7 - Sugestão : acrescentar status de controle de situação do projeto : Em andamento , Em rescunho , Bloqueado , Finalizado ou Encerrado. Apenas usuarios no
+7 - Sugestão : acrescentar status de controle de situação do projeto : Em andamento , Em rascunho , Bloqueado , Finalizado ou Encerrado. Apenas usuarios no
 papel de Gerente pode alterar o status.
 
 8 - Sugestão : Todas vez que o gerente criar , alterar ou excluir um projeto deve ser disparado uma notificação de aviso para a área PMO ( Project Management
 Office).
 
-9 - Sugestão : Implementar status de situação de usuário no projeto. Exemplos : Em férias , Afastados , Desligados.
+9 - Sugestão : Implementar status de situação de usuário no projeto. Exemplos : Em férias , Afastado , Desligado.
 
 10 - Sugestão : Implementar funcionalidade de busca de todas as tarefas e comentarios relacionados ao usuário responsável por suas atividades
 
