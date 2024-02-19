@@ -81,7 +81,7 @@ namespace EclipeWorks.Challenger.Api
 
             //if (builder.Environment.IsDevelopment())
             //{
-            //    connectionString = $"Data Source={server};Initial Catalog={database};User ID={user};Password={password};Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;";
+            //    connectionString = configuration.GetValue<string>("ConnectionStringsLocal:EclipseWorksChallengerDb");
             //}
 
             return connectionString;
