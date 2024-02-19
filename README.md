@@ -206,7 +206,7 @@ especializados na camada de infra-estrutura dos projetos associados a aplicaçã
 9 - Prover chamada de geração de logs através de serviços ou apis especializadas entre as camadas da arquitetura da aplicação e grava-los em algum banco de dados NOSQL no modelo Key-Value
 
 10 - Em caso de consultas constantes no banco de dados para processamento transacionais de dados, fazer uso de algum pacote de controle de memory cache ( exemplo : Microsoft.Extensions.Caching.Memory)
-ou em caso de requisições de alto volume e distribuidas entre varias plataformas consumidoras da API do projeto fazer uso de serviços especializados em controle de chache . Exemplos : Redis ,AWS 
+ou em caso de requisições de alto volume e distribuidas entre varias plataformas consumidoras da API do projeto fazer uso de serviços especializados em controle de cache . Exemplos : Redis ,AWS 
 Elastic Search , Azure Cache for Redis entre outras soluções.
 
 
