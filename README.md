@@ -209,6 +209,10 @@ especializados na camada de infra-estrutura dos projetos associados a aplicaçã
 ou em caso de requisições de alto volume e distribuidas entre varias plataformas consumidoras da API do projeto fazer uso de serviços especializados em controle de cache . Exemplos : Redis ,AWS 
 Elastic Search , Azure Cache for Redis entre outras soluções.
 
+11 - Aplicar ferramenta de análise estatica de código fonte para atestar a qualidade do código porduzido na versão da branch no momento de entrega por Pull Request para code review.
+
+12 - Aplicação de testes de integração  para requisição de API e comunicação entre apis proprietárias e de terceiros usando ferramentas para este fim . Exemplo : framework Mocha API Testing.
+
 
 
 
