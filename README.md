@@ -29,6 +29,14 @@ a – Criar um projeto :
 
 POST : http://localhost:8090/eclipseworks/api/project
 
+REQUEST BODY :
+
+{
+  "nameProject": "string",
+  "observation": "string",
+  "idOwner": 0
+}
+
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/67e4bf01-854d-4804-be9d-c650a57de7dd)
 
 b -  Buscar projetos pelo IdOwner :
@@ -53,6 +61,20 @@ e – Atualizar uma tarefa :
 
 PUT :  http://localhost:8090/eclipseworks/api/project/task
 
+REQUEST BODY :
+
+{
+  "idTask": 0,
+  "status": 0,
+  "idProject": 0,
+  "idOwner": 0,
+  "title": "string",
+  "description": "string",
+  "dueDate": "2024-02-19T12:59:51.248Z"
+}
+
+
+
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/1ffaeb4d-ad82-47a9-9371-4a33a023352a)
 
 f – Excluir uma tarefa :
@@ -70,6 +92,17 @@ GET: http://localhost:8090/eclipseworks/api/project/task?idProject=?
 h – Adicionar um comentário em uma tarefa :
 
 POST: http://localhost:8090/eclipseworks/api/project/task/comment
+
+REQUEST BODY :
+{
+  "idPriority": 0,
+  "status": 0,
+  "idProject": 0,
+  "idOwner": 0,
+  "title": "string",
+  "description": "string",
+  "dueDate": "2024-02-19T12:58:52.146Z"
+}
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/1d6bf8de-2efe-4fa6-8c77-210d8b291f25)
 
@@ -135,7 +168,7 @@ projeto proposto em ambiente interno. Podemos citar alguns principais beneficios
 componentes da arquitetura da solução, através de uso de APIs especializadas. Podemos citar como exemplos: WhatsApp Business API ou API do Microsoft Teams.
 
 
-### Visão de evolução da arquitetura dsa solução da aplicação 
+### Visão de evolução da arquitetura da solução da aplicação 
 
 1- Usar conceitos de CQRS para separação entre as requisições de consulta e as requisições transacionais através de uso de separação entre servidores de SGDB 
 especializados e bancos de dados para cada caso.
@@ -163,7 +196,11 @@ especializados na camada de infra-estrutura dos projetos associados a aplicaçã
 
 9 - Prover chamada de geração de logs através de serviços ou apis especializadas entre as camadas da arquitetura da aplicação e grava-los em algum banco de dados NOSQL no modelo Key-Value
 
-10 - 
+10 - Em caso de consultas constantes no banco de dados para processamento transacionais de dados, fazer uso de algum pacote de controle de memory cache ( exemplo : Microsoft.Extensions.Caching.Memory)
+ou em caso de requisições de alto volume e distribuidas entre varias plataformas consumidoras da API do projeto fazer uso de serviços especializados em controle de chache . Exemplos : Redis ,AWS 
+Elastic Search , Azure Cache for Redis entre outras soluções.
+
+
 
 
 
