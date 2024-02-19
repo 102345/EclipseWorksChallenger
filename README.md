@@ -55,6 +55,18 @@ d - Criar uma tarefa :
 
 POST :  http://localhost:8090/eclipseworks/api/project/task
 
+
+REQUEST BODY :
+{
+  "idPriority": 0,
+  "status": 0,
+  "idProject": 0,
+  "idOwner": 0,
+  "title": "string",
+  "description": "string",
+  "dueDate": "2024-02-19T12:58:52.146Z"
+}
+
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/18e1c375-1b4e-4023-a2bf-1c5a9bcb1436)
 
 e – Atualizar uma tarefa :
@@ -94,15 +106,12 @@ h – Adicionar um comentário em uma tarefa :
 POST: http://localhost:8090/eclipseworks/api/project/task/comment
 
 REQUEST BODY :
+
 {
-  "idPriority": 0,
-  "status": 0,
-  "idProject": 0,
-  "idOwner": 0,
-  "title": "string",
-  "description": "string",
-  "dueDate": "2024-02-19T12:58:52.146Z"
+  "idTask": 0,
+  "description": "string"
 }
+
 
 ![image](https://github.com/102345/EclipseWorksChallenger/assets/31006716/1d6bf8de-2efe-4fa6-8c77-210d8b291f25)
 
