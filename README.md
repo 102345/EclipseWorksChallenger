@@ -113,6 +113,61 @@ Office).
 
 10 - Sugestão : Implementar funcionalidade de busca de todas as tarefas e comentarios relacionados ao usuário responsável por suas atividades
 
+## Propostas de melhoria no projeto
+
+### Visão de integração com ferramentas de apoio de infra-estrutura e melhores práticas
+
+1- Usar plataforma de monitoramento (APM) para métricas de consumo de recursos de serviços contratados por cloud através de geração 
+de dashbords e geração de relatórios dados de uso , gargalos de desempenho de chamadas de APIs e outros componentes de integração 
+de uma arquitetura distribuida , principais chamadas de desempenho , tempo de latência e resposta de um processamento de requisição
+de um serviço ou API. Exemplo de APM : Datadog , Splunk ou Azure Application Insights.
+
+2- Integração do serviços de API Gateways para filtragem e separação de requisições entre as APIS de terceiros e a API interna do
+projeto proposto em ambiente interno. Podemos citar alguns principais beneficios relacionados a esta solução :
+- Único ponto de entrada no sistema‍
+- Camada adicional de segurança
+- Simplicidade e transparência para o consumidor final
+- Evitar expor questões internas a clientes externos
+- Separação de camada de aplicação
+- Melhoria nos desenvolvimentos
+
+3 - Usar serviços de notificação para disparo de alertas para eventos não programados ou possiveis falhas de funcionamento de
+componentes da arquitetura da solução, através de uso de APIs especializadas. Podemos citar como exemplos: WhatsApp Business API ou API do Microsoft Teams.
+
+
+### Visão de evolução da arquitetura dsa solução da aplicação 
+
+1- Usar conceitos de CQRS para separação entre as requisições de consulta e as requisições transacionais através de uso de separação entre servidores de SGDB 
+especializados e bancos de dados para cada caso.
+
+2- Implementação de serviços automatizados em background (aplicações em processanto batch, Workers Services ou Windows Services) para sincronização de dados
+gerados entre as bases de dados transacionais e as bases de dados responsaveis por geração de informações para consulta.
+
+3 -Se aplicação escalar de forma evolucionaria ao longo de seu ciclo de vida , fazer uso de integração de serviços de mensageria para processamento assincrono
+de dados das requisições transacionais. Exemplo de principais serviços : RabbitMQ , Azure Service Message Bus, Amazon Simple Queue Service entre outras soluções
+disponiveis.
+
+4- Usar serviços de cloud para armazenamento de segredos e dados sensiveis da aplicação como por exemplo AWS Secrets Manager ou Microsoft Azure KeyVault.
+
+5- Implementar chamada de serviços de criptografia para dados sensiveis no trafego da requisição e também na gravação de informações nos bancos de dados .
+
+6 - Para exposição de necessidades especificas de integração e consumo de dados através de chamadas das APIs pela camada de front ends , implementar uma camada intermediaria
+para tratamento especificos das requsições relacionadas a autenticação e autorização de acesso, tradução dos dados que serão usados através de contratos customizados,
+validação dos dados , gerenciamento e controle de erros gerados entre outros requisitos não funcionais. Este design arquitetural é provido por conceitos e praticas de BFF.
+
+7 - Aplicar conceitos de redudância através de duplicação de componentes de infra-estrutura (servidores de SGDBS on Cloud ou On-Premisse , serviços de build de APIS e de host
+on Cloud , Servidores de aplicação , Servidores de Message Brokers entre outros ) para prover alta disponibilidade de acesso.
+
+8 - Aplicar tecnicas de resiliência  para tentativas de chamadas para processamento e integração de dados através de uso de algoritmos de tratamento de resiliência ou pacotes de terceiros
+especializados na camada de infra-estrutura dos projetos associados a aplicação.
+
+9 - Prover chamada de geração de logs através de serviços ou apis especializadas entre as camadas da arquitetura da aplicação e grava-los em algum banco de dados NOSQL no modelo Key-Value
+
+10 - 
+
+
+
+
 
 
 
