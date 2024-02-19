@@ -4,7 +4,7 @@ Segue um projeto com o uso das seguintes tecnologias : WebApi .NET 7 , ORM Dappe
 Padrões arquiteturais : Domain Driven Design , Dependency Injections , UnitOfWOrk , divisão de responsabilidade entre camadas da arquitetura entre outros
 usados.
 
-## Intruções para rodar o docker
+## Instruções para rodar o docker
 
 1 – Abra o arquivo docker-compose.yml e altere o caminho da pasta onde se encontra o arquivo database.sql para o seu caminho de projeto de seu computador conforme a imagem a seguir.
 
