@@ -182,7 +182,7 @@ componentes da arquitetura da solução, através de uso de APIs especializadas.
 1- Usar conceitos de CQRS para separação entre as requisições de consulta e as requisições transacionais através de uso de separação entre servidores de SGDB 
 especializados e bancos de dados para cada caso.
 
-2- Implementação de serviços automatizados em background (aplicações em processanto batch, Workers Services ou Windows Services) para sincronização de dados
+2- Implementação de serviços automatizados em background (aplicações em processamento em batchs, Workers Services, Windows Services, Azure Web Jobs entre outros.) para sincronização de dados
 gerados entre as bases de dados transacionais e as bases de dados responsaveis por geração de informações para consulta.
 
 3 -Se aplicação escalar de forma evolucionaria ao longo de seu ciclo de vida , fazer uso de integração de serviços de mensageria para processamento assincrono
