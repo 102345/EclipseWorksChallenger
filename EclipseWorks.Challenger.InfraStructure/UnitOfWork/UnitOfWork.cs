@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace EclipseWorks.Challenger.InfraStructure.UnitOfWork
 {
+    // Implementação de patten Unit Of Work
     [ExcludeFromCodeCoverage]
     public class UnitOfWork : IUnitOfWork
     {
