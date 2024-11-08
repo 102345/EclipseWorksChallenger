@@ -1,4 +1,5 @@
-﻿CREATE DATABASE [EclipseWorksChallengerDb]
+﻿
+CREATE DATABASE [EclipseWorksChallengerDb]
 GO
 USE [EclipseWorksChallengerDb]
 GO
