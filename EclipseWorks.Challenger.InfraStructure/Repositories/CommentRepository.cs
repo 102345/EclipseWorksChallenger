@@ -67,5 +67,10 @@ namespace EclipseWorks.Challenger.InfraStructure.Repositories
 
             return await _connection.QueryAsync<Comment>(sql, new { IdTask = idTask }, _transaction);
         }
+
+        public Task<System.Linq.Dynamic.Core.PagedResult<Comment>> GetCommentsByTask(int idTask, int pageNumber = 1, int pageSize = 10)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
