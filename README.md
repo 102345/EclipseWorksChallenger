@@ -4,7 +4,7 @@ Segue um projeto com o uso das seguintes tecnologias : WebApi .NET 7 , ORM Dappe
 Padrões arquiteturais : Domain Driven Design , Dependency Injections , UnitOfWOrk , divisão de responsabilidade entre camadas da arquitetura entre outros
 usados.
 
-## Intruções para rodar o docker
+## Instruções para rodar a API no Docker Service
 
 1 – Abra o arquivo docker-compose.yml e altere o caminho da pasta onde se encontra o arquivo database.sql para o seu caminho de projeto de seu computador conforme a imagem a seguir.
 
@@ -145,13 +145,13 @@ suas atividades sem ter acesso as informações de atividades de outro gerente d
 
 6 - Sugestão : Apenas usuários no papel de gerente podem criar , alterar  ou excluir projeto.
 
-7 - Sugestão : acrescentar status de controle de situação do projeto : Em andamento , Em rescunho , Bloqueado , Finalizado ou Encerrado. Apenas usuarios no
+7 - Sugestão : acrescentar status de controle de situação do projeto : Em andamento , Em rascunho , Bloqueado , Finalizado ou Encerrado. Apenas usuarios no
 papel de Gerente pode alterar o status.
 
 8 - Sugestão : Todas vez que o gerente criar , alterar ou excluir um projeto deve ser disparado uma notificação de aviso para a área PMO ( Project Management
 Office).
 
-9 - Sugestão : Implementar status de situação de usuário no projeto. Exemplos : Em férias , Afastados , Desligados.
+9 - Sugestão : Implementar status de situação de usuário no projeto. Exemplos : Em férias , Afastado , Desligado.
 
 10 - Sugestão : Implementar funcionalidade de busca de todas as tarefas e comentarios relacionados ao usuário responsável por suas atividades
 
@@ -182,7 +182,7 @@ componentes da arquitetura da solução, através de uso de APIs especializadas.
 1- Usar conceitos de CQRS para separação entre as requisições de consulta e as requisições transacionais através de uso de separação entre servidores de SGDB 
 especializados e bancos de dados para cada caso.
 
-2- Implementação de serviços automatizados em background (aplicações em processanto batch, Workers Services ou Windows Services) para sincronização de dados
+2- Implementação de serviços automatizados em background (aplicações em processamento em batchs, Workers Services, Windows Services, Azure Web Jobs entre outros.) para sincronização de dados
 gerados entre as bases de dados transacionais e as bases de dados responsaveis por geração de informações para consulta.
 
 3 -Se aplicação escalar de forma evolucionaria ao longo de seu ciclo de vida , fazer uso de integração de serviços de mensageria para processamento assincrono
@@ -206,8 +206,12 @@ especializados na camada de infra-estrutura dos projetos associados a aplicaçã
 9 - Prover chamada de geração de logs através de serviços ou apis especializadas entre as camadas da arquitetura da aplicação e grava-los em algum banco de dados NOSQL no modelo Key-Value
 
 10 - Em caso de consultas constantes no banco de dados para processamento transacionais de dados, fazer uso de algum pacote de controle de memory cache ( exemplo : Microsoft.Extensions.Caching.Memory)
-ou em caso de requisições de alto volume e distribuidas entre varias plataformas consumidoras da API do projeto fazer uso de serviços especializados em controle de chache . Exemplos : Redis ,AWS 
+ou em caso de requisições de alto volume e distribuidas entre varias plataformas consumidoras da API do projeto fazer uso de serviços especializados em controle de cache . Exemplos : Redis ,AWS 
 Elastic Search , Azure Cache for Redis entre outras soluções.
+
+11 - Aplicar ferramenta de análise estatica de código fonte para atestar a qualidade do código porduzido na versão da branch no momento de entrega por Pull Request para code review.
+
+12 - Aplicação de testes de integração  para requisição de API e comunicação entre apis proprietárias e de terceiros usando ferramentas para este fim . Exemplo : framework Mocha API Testing.
 
 
 
