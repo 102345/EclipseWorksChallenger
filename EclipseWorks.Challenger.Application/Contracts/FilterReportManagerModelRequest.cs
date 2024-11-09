@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
 namespace EclipseWorks.Challenger.Application.Contracts
-{
+{   
+    //Contrato de requisição de Relatorio Gerencial
     [ExcludeFromCodeCoverage]
     public class FilterReportManagerModelRequest
     {
