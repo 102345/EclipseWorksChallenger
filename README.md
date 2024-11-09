@@ -203,7 +203,7 @@ on Cloud , Servidores de aplicação , Servidores de Message Brokers entre outro
 8 - Aplicar tecnicas de resiliência  para tentativas de chamadas para processamento e integração de dados através de uso de algoritmos de tratamento de resiliência ou pacotes de terceiros
 especializados na camada de infra-estrutura dos projetos associados a aplicação.
 
-9 - Prover chamada de geração de logs através de serviços ou apis especializadas entre as camadas da arquitetura da aplicação e grava-los em algum banco de dados NOSQL no modelo Key-Value
+9 - Prover chamada de geração de logs através de serviços ou apis especializadas entre as camadas da arquitetura da aplicação e grava-los em algum banco de dados NoSQL no modelo Key-Value
 
 10 - Em caso de consultas constantes no banco de dados para processamento transacionais de dados, fazer uso de algum pacote de controle de memory cache ( exemplo : Microsoft.Extensions.Caching.Memory)
 ou em caso de requisições de alto volume e distribuidas entre varias plataformas consumidoras da API do projeto fazer uso de serviços especializados em controle de cache . Exemplos : Redis ,AWS 
