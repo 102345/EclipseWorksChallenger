@@ -2,7 +2,7 @@
 
 Segue um projeto com o uso das seguintes tecnologias : WebApi .NET 7 , ORM Dapper , FluentValidation , Mapper , Docker.
 Padrões arquiteturais : Domain Driven Design , Dependency Injections , UnitOfWOrk , divisão de responsabilidade entre camadas da arquitetura entre outros
-usados.Segir as intruções de acordo com os próximos passos descritos abaixo
+usados.Seguir as intruções de acordo com os próximos passos descritos abaixo
 
 ## Instruções para rodar a API no Docker Service
 
