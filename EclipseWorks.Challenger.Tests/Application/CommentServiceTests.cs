@@ -6,7 +6,8 @@ using FluentAssertions;
 using NSubstitute;
 
 namespace EclipseWorks.Challenger.Tests.Application
-{
+{   
+    //Verificação de testes unitarios para ações com entidade Comment
     public  class CommentServiceTests
     {
         [Theory, AutoNSubstituteData]
