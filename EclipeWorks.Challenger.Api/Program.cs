@@ -20,8 +20,8 @@ namespace EclipeWorks.Challenger.Api
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
             //Utilizar para testes em ambiente local
-            //var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            var environmentName = string.Empty;
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            //var environmentName = string.Empty;
 
             var configuration = new ConfigurationBuilder()
                                  .SetBasePath(Directory.GetCurrentDirectory())
@@ -81,10 +81,10 @@ namespace EclipeWorks.Challenger.Api
             var connectionString = $"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password};Trust Server Certificate=True;";
 
             //Utilizar para testes em ambiente local
-            //if (builder.Environment.IsDevelopment())
-            //{
-            //    connectionString = configuration.GetValue<string>("ConnectionStringsLocal:EclipseWorksChallengerDb");
-            //}
+            if (builder.Environment.IsDevelopment())
+            {
+                connectionString = configuration.GetValue<string>("ConnectionStringsLocal:EclipseWorksChallengerDb");
+            }
 
             return connectionString;
         }

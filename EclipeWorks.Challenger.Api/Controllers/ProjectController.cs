@@ -27,9 +27,8 @@ namespace EclipeWorks.Challenger.Api.Controllers
         }
 
 
-
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] int idOwner)
+        [HttpGet("idOwner/{idOwner}")]
+        public async Task<IActionResult> Get(int idOwner)
         {
             var owner = await _ownerService.GetById(idOwner);
 
@@ -39,7 +38,7 @@ namespace EclipeWorks.Challenger.Api.Controllers
             }
 
 
-            var projects= await _projectService.GetAllAsync(idOwner);
+            var projects = await _projectService.GetAllAsync(idOwner);
 
             if (projects != null)
             {
@@ -77,8 +76,8 @@ namespace EclipeWorks.Challenger.Api.Controllers
         }
 
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery] int idProject)
+        [HttpDelete("{idProject}")]
+        public async Task<IActionResult> Delete(int idProject)
         {
 
             var project = await _projectService.GetById(idProject);
