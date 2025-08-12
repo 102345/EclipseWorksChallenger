@@ -19,7 +19,8 @@ namespace EclipeWorks.Challenger.Api.Controllers
         private readonly IValidator<CommentModel> _validator;
 
         public CommentController(IMapper mapper, ICommentService commentService, IValidator<CommentModel> validator)
-        {
+        {   
+            //teste de github
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _commentService = commentService ?? throw new ArgumentNullException(nameof(commentService));
             _validator = validator ?? throw new ArgumentNullException(nameof(validator));
